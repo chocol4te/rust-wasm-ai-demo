@@ -1,52 +1,81 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Demo</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js" integrity="sha384-qlmct0AOBiA2VPZkMY3+2WqkHtIQ9lSdAsAn5RUJD/3vA5MKDgSGcdmIv4ycVxyn" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Markov Demo</title>
 
-    <script>
-$(function() {
-    var options = {
-      target: '#result',
-      url: "/infer",
-      type: "post",
-      success: enableButton
-    };
-    $('#infer').ajaxForm(options);
-});
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"
+    integrity="sha384-qlmct0AOBiA2VPZkMY3+2WqkHtIQ9lSdAsAn5RUJD/3vA5MKDgSGcdmIv4ycVxyn"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
 
-function enableButton(responseText, statusText, xhr, $form)  {
-    $('#recognize').prop('disabled', false);
-}
-    </script>
-  </head>
+  <script>
+    $(function () {
+      var options = {
+        target: '#result',
+        url: "/markov",
+        type: "post",
+        success: enableButton
+      };
+      $('#markov').ajaxForm(options);
+    });
 
-  <body>
-    <div class="container">
+    function enableButton(responseText, statusText, xhr, $form) {
+      $('#generate').prop('disabled', false);
+    }
+  </script>
+</head>
 
-      <h1>What's on the image?</h1>
-      <p class="lead">Image recognition as a service powered by Rust, Tensorflow, and Node.js. <a href="https://www.secondstate.io/articles/artificial-intelligence/">How it works</a></p>
+<body>
+  <div class="container">
 
-      <form id="infer" enctype="multipart/form-data">
-        <div class="form-group">
-		<label for="image_file">Please upload an image file (<a href="grace_hopper.jpg">example</a>)</label>
-          <input type="file" class="form-control-file" id="image_file" name="image_file">
-        </div>
+    <h1>Markov Chain Demo</h1>
 
-	<button type="submit" class="btn btn-primary mb-2" id="recognize" onclick="setTimeout(function(){$('#result').text('Please wait. This could take a minute');$('#recognize').prop('disabled', true);},0);return true;">Recognize</button>
-      </form>
-
-      <div class="jumbotron">
-        <p id="result" class="lead"></p>
+    <form id="markov" enctype="text/plain">
+      <div class="form-group">
+        <textarea name="input_text" form="markov">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+           Eget arcu dictum varius duis at consectetur.
+           Pulvinar mattis nunc sed blandit.
+           Donec pretium vulputate sapien nec.
+           Amet est placerat in egestas erat.
+           Etiam non quam lacus suspendisse faucibus interdum posuere lorem ipsum.
+           Leo in vitae turpis massa sed.
+           Feugiat nisl pretium fusce id velit ut tortor.
+           Facilisi nullam vehicula ipsum a.
+           Augue interdum velit euismod in.
+           Blandit volutpat maecenas volutpat blandit aliquam etiam.
+           Egestas tellus rutrum tellus pellentesque eu tincidunt tortor aliquam.
+           Proin nibh nisl condimentum id venenatis.
+           Fermentum et sollicitudin ac orci phasellus egestas tellus rutrum.
+           Etiam dignissim diam quis enim lobortis scelerisque fermentum dui faucibus.
+           Lectus sit amet est placerat in egestas erat.
+           Tincidunt tortor aliquam nulla facilisi cras.
+           Habitant morbi tristique senectus et netus et malesuada fames ac.</textarea>
+        </br>
+        Output string count: <input type="number" id="count" name="count" value="5" min="1" max="10">
       </div>
 
-    </div> <!-- /container -->
-  </body>
+
+      <button type="submit" class="btn btn-primary mb-2" id="generate"
+        onclick="setTimeout(function(){$('#generate').prop('disabled', true);},0);return true;">Generate</button>
+    </form>
+
+    <div class="jumbotron">
+      <p id="result" class="lead"></p>
+    </div>
+
+  </div> <!-- /container -->
+</body>
+
 </html>
